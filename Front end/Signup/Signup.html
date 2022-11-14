@@ -12,7 +12,7 @@
     <div class="container">
         <h1>EXPENSIVE TRACKER</h1>
         <div class="form_space">
-            <form action="" method="POST" id="signUp_form">
+            <form action="/" method="POST" id="signUp_form">
                 <label for="name">NAME:</label> <br>
                 <input type="text" id="name" name="name" placeholder="Enter Your Name" required> <br>
                 <label for="email">EMAIL:</label> <br>
@@ -22,11 +22,13 @@
 
                 <button type="submit">Sign Up</button>
             </form>
+                <div class="anchor_links">
+                    <a href="Log-In">Already a member</a>
+                </div>
         </div>
-        <div class="anchor_links">
-            <a href="Log-In">Already a member</a>
-        </div>
+        
     </div>
+    <div class="error"></div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </html>

@@ -12,6 +12,9 @@
     color:brown;
 }
 .form_space{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50vw;
     height: 60vh;
     margin: auto;
@@ -20,13 +23,13 @@
     box-shadow: 5px 3px 15px;
     /* background-color: aquamarine; */
 }
-#signUp_form label{
+#logIn_form label{
     float: left;
     font-size: 1.2em;
     margin-bottom: 10px;
 }
-#signUp_form input{
-    width: 80%;
+.form_space input{
+    width: 40vw;
     height: 40px;
     margin: 15px;
     margin-bottom: 50px;
@@ -35,7 +38,7 @@
     border: none;
     background-color: aliceblue;
 }
-#signUp_form button{
+#logIn_form button{
     padding: 0.8em;
     border: none;
     border-radius: 5px;
@@ -43,6 +46,7 @@
 }
 .anchor_links{
     margin-top: 20px;
+    
     
 }
 .anchor_links a{

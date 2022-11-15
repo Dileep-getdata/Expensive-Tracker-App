@@ -18,8 +18,8 @@ exports.postSignupDetails= async(req,res)=>{
     await Users.create({
         userName:name,
         email:email,
-        passowrd:password})
-    res.status(201).json({message:'Successfully signed Up'})
+        password:password})
+    res.status(200).json({message:'Successfully signed Up'})
     }catch(err){
         res.status(500).json({err});
     }
@@ -33,10 +33,10 @@ exports.postLogin=(req,res)=>{
             return res.status(400).json({err:'Bad Input'});
         }
         Users.findAll({where:{email:email}})
-        .then((user)=>{
-            // console.log(user[0]);
+        .then((user)=>{            
             if(user[0]!==undefined){
-                if(user[0].password===password){
+                console.log(user[0].passowrd,password);
+                if((user[0].password)===password){
                     return  res.status(200).json({message:'Succesfully loged in'});
                  }else{
                      return res.status(215).json({message:'Wrong password'});

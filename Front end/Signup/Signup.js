@@ -14,12 +14,29 @@ signupForm.addEventListener('submit',(e)=>{
    
         axios.post('http://localhost:4050/user/signup',signup_details)
     .then(response=>{        
-            console.log('response'+response);        
+            console.log(response.data.message); 
+        if(response.status===200){
+            MesageShow(response.data.message,'green');
+            document.getElementById('name').value='';
+            document.getElementById('email').value='';
+            document.getElementById('password').value='';
+        }       
         
     })
-    .catch(err=>console.log(err))
-    // console.log(nameI);
-    
+    .catch(err=>{
+        console.log(err);
+        MesageShow(err.message,'red');
+    })     
    
     
 })
+function MesageShow(msg,color){    
+        const message=document.getElementById('message');
+        const notification=document.createElement('h3');
+        notification.innerHTML=msg;
+        notification.style.color=color;
+        message.appendChild(notification);
+        setTimeout(()=>{
+                 notification.remove() },3000);
+    
+}

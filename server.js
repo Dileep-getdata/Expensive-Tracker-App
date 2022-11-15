@@ -1,9 +1,16 @@
 const express=require('express');
 const app=express();
+
+
+
+const dotenv=require('dotenv');
+dotenv.config();
+
+
 const sequelize=require('./util/database');
 const bodypraser=require('body-parser');
 const userRouter=require('./router/user');
-const dotenv=require('dotenv');
+
 
 app.use(express.json());
 

@@ -10,10 +10,13 @@ logInForm.addEventListener('submit',(e)=>{
         email:email,
         password:password
     };   
+    
         axios.post('http://localhost:4050/user/login',logIn_details)
     .then(response=>{  
         if(response.status==200)  {
-            alert('ding');
+            errorSHow(response.data.message,'green');
+            alert('Ding');
+            
         }else{
             console.log(response.data); 
             errorSHow(response.data.message); 
@@ -29,8 +32,13 @@ logInForm.addEventListener('submit',(e)=>{
    
     
 })
-function errorSHow(err){
+function errorSHow(err,color='red'){
     const error=document.getElementById('error');
-    error.innerHTML=err;
-    error.style.color='red';
+    const notification=document.createElement('h3');
+    notification.innerHTML=err;
+    notification.style.color=color;
+    error.appendChild(notification);
+    setTimeout(()=>{
+        notification.remove();
+    },3000);
 }

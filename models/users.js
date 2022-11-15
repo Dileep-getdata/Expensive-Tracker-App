@@ -20,7 +20,7 @@ const Users=sequelize.define('users',{
         unique:true,
         allowNull:false
     },
-    passowrd:{
+    password:{
         type:Sequelize.STRING,
         allowNull:false
     }

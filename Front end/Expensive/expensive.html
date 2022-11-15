@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expensive Tracker</title>
+    <script src="expensive.js" defer></script>
+</head>
+<body>
+    <div>
+        <div>
+            <form  id="myform" method="post" >
+                <label for="amount">Choose Expense Amount:</label>
+                <input type="text" id="amount" name="amount" placeholder="Enter Amount"><br>
+                <label for="description">Choose Description:</label>
+                <input type="text" id="description" name="description" placeholder="Ammount Spended "><br>
+                <label for="category">Choose Category:</label>
+                <select name="category" id="category">
+                    <option value="fuel">Fuel</option>
+                    <option value="electricity">Electricity</option>
+                    <option value="food">Food</option>
+                    <option value="movie">Movie</option>
+                </select><br><br>
+                <button type="submit" id="submit"> Add Expense </button>                     
+                
+            </form>
+        </div>
+        <form method="POST" id="dropDownForm">
+            <label for="cars">Rows per page:</label>
+
+                <select name="no_rows" id="no_rows">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                </select>
+                <button type="submit" class="rows_drpDown">Apply</button>
+        </form>
+        <ul id="list-User">
+
+        </ul>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</html>

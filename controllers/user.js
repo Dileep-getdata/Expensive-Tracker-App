@@ -43,10 +43,10 @@ exports.postLogin=(req,res)=>{
                     if((user[0].password)===password){
                         return  res.status(200).json({message:'Succesfully loged in'});
                     }else{
-                        return res.status(215).json({message:'Wrong password'});
+                        return res.status(401).json({message:'Wrong password'});
                     }
                 }else{
-                    return res.status(405).json({message:'Not registered Sign Up'});
+                    return res.status(404).json({message:'Not registered Sign Up'});
                 }
             })
             .catch(err=>console.log(err));

@@ -5,16 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expensive Tracker</title>
+    <link rel="stylesheet" href="expensive.css">
     <script src="expensive.js" defer></script>
 </head>
 <body>
-    <div>
-        <div>
+    <div class="container">
+        <h1>EXPENSIVE TRACKER</h1>
+        <div class="form_container">
             <form  id="myform" method="post" >
                 <label for="amount">Choose Expense Amount:</label>
                 <input type="text" id="amount" name="amount" placeholder="Enter Amount"><br>
                 <label for="description">Choose Description:</label>
-                <input type="text" id="description" name="description" placeholder="Ammount Spended "><br>
+                <input type="text" id="description" name="description" placeholder="Enter Description"><br>
                 <label for="category">Choose Category:</label>
                 <select name="category" id="category">
                     <option value="fuel">Fuel</option>
@@ -25,7 +27,8 @@
                 <button type="submit" id="submit"> Add Expense </button>                     
                 
             </form>
-        </div>
+        </div >
+        <div class='listOfExpenses'>
         <form method="POST" id="dropDownForm">
             <label for="cars">Rows per page:</label>
 
@@ -37,9 +40,10 @@
                 </select>
                 <button type="submit" class="rows_drpDown">Apply</button>
         </form>
-        <ul id="list-User">
-
+        <ul id="list-Expenses">
+            
         </ul>
+    </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

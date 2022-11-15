@@ -1,3 +1,4 @@
+
 const Users=require('../models/users');
 const bcrypt=require('bcrypt');
 
@@ -13,29 +14,26 @@ function isString(string){
 // 
 exports.postSignupDetails= async(req,res)=>{
     try{
-    const {name,email,password}=req.body;
-    console.log(typeof name);
-    if(isString(name) || isString(email) || isString(password)){        
-       return  res.status(400).json({err:'Bad Input data'});
-    }    
-    const saltaround=10;
-    bcrypt.hash(password,saltaround, async(err,hash)=>{
-        if(!err){
-            if(email===Users.findAll({where:{email}})){
-                return res.status(404).json({message:'User Already Exits'})
-            }
-            await Users.create({
-                userName:name,
-                email:email,
-                password:hash})
-            res.status(200).json({message:'Successfully signed Up'})
-        }else{
-            throw new Error("Error issue at bcrypt hash");
+        const {name,email,password}=req.body;    
+        if(isString(name) || isString(email) || isString(password)){        
+            return  res.status(400).json({err:'Bad Input data'});
         }
-    });
-    
-    }catch(err){
-        res.status(500).json({err});
+        const saltrounds=10;
+        bcrypt.hash(password,saltrounds, async(err,hash)=>{   
+            const userEmail=await Users.findAll({where:{email}});             
+            if(email===userEmail[0].email){                
+                return res.status(404).json({success:false,message:'Exiting Email Id'}); 
+            }                
+                await Users.create({
+                    userName:name,
+                    email:email,
+                    password:hash});
+                res.status(200).json({success:true,message:'Successfully signed Up'});        
+        
+        })    
+    }
+    catch(err){
+        res.status(500).json({message:err,success:false});
     }
 }
 // >>>>>>>>>>>>  END     <<<<<<<<<<<<<
@@ -59,14 +57,15 @@ exports.postLogin=(req,res)=>{
                         }
                         console.log(result);
                         if(result===true){
-                            return  res.status(200).json({message:'Succesfully loged in'});
+                            
+                            return  res.status(200).json({success:true,message:'Succesfully loged in'});
                         }else{
-                            return res.status(401).json({message:'Wrong password'});
+                            return res.status(401).json({success:false,message:'Wrong password'});
                         }
                     })                  
                    
                 }else{
-                    return res.status(404).json({message:'Not registered Sign Up'});
+                    return res.status(404).json({success:false,message:'Not registered Sign Up'});
                 }
             })
             .catch(err=>console.log(err));

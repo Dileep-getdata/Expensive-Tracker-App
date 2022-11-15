@@ -10,6 +10,9 @@ dotenv.config();
 const sequelize=require('./util/database');
 const bodypraser=require('body-parser');
 const userRouter=require('./router/user');
+const expensesRouter=require('./router/expenses');
+const Users=require('./models/users');
+const Expenses=require('./models/expenses');
 
 
 app.use(express.json());
@@ -18,7 +21,10 @@ const cors=require('cors');
 app.use(cors());
 
 app.use('/user',userRouter);
+app.use('/expenses',expensesRouter);
 
+Expenses.belongsTo(Users);
+Users.hasMany(Expenses);
 
 sequelize
 // .sync({force:true})

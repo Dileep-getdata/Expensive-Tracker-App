@@ -20,12 +20,14 @@ signupForm.addEventListener('submit',(e)=>{
             document.getElementById('name').value='';
             document.getElementById('email').value='';
             document.getElementById('password').value='';
+        }else{
+            throw new Error('Aleary exits');
         }       
         
     })
     .catch(err=>{
         console.log(err);
-        MesageShow(err.message,'red');
+        MesageShow(err.response.data.message,'red');
     })     
    
     

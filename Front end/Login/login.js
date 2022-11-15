@@ -13,7 +13,8 @@ logInForm.addEventListener('submit',(e)=>{
         .then(response=>{  
             if(response.status==200)  {
                 errorSHow(response.data.message,'green');
-                alert('Ding');            
+                alert('Ding');  
+                window.location.replace("../Expensive/expensive.html");       
             }else{
                 console.log(response.data); 
                 errorSHow(response.data.message); 

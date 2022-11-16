@@ -1,6 +1,7 @@
 
 const Users=require('../models/users');
 const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken');
 
 function isString(string){
     if(string==undefined || string.length===0){
@@ -57,8 +58,8 @@ exports.postLogin=(req,res)=>{
                         }
                         console.log(result);
                         if(result===true){
-                            
-                            return  res.status(200).json({success:true,message:'Succesfully loged in'});
+                            const token = tokenGenrate(user[0].id,user[0].name);
+                            return  res.status(200).json({success:true,message:'Succesfully loged in',token:token});
                         }else{
                             return res.status(401).json({success:false,message:'Wrong password'});
                         }
@@ -74,6 +75,10 @@ exports.postLogin=(req,res)=>{
     }
 };
 // >>>>>>>>>>>>  END     <<<<<<<<<<<<<
+
+function tokenGenrate(id,name){
+     return jwt.sign({id,name},process.env.TOKEN_SECREATKEY);
+}
 
 // exports.getSignupDetails=(req,res)=>{
 //     console.log(req.body);

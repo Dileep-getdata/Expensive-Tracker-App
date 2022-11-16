@@ -12,6 +12,9 @@ logInForm.addEventListener('submit',(e)=>{
     axios.post('http://localhost:4050/user/login',logIn_details)
         .then(response=>{  
             if(response.status==200)  {
+                console.log(response.data);
+                localStorage.setItem('token',response.data.token);
+                localStorage.setItem('Name',response.data.name);
                 errorSHow(response.data.message,'green');
                 alert('Ding');  
                 window.location.replace("../Expensive/expensive.html");       

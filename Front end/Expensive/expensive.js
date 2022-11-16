@@ -1,12 +1,15 @@
 
 window.addEventListener('DOMContentLoaded',()=>{
 
-    axios.get('http://localhost:4050/expenses/addExpenses')
+    const token=localStorage.getItem('token');
+    
+    axios.get('http://localhost:4050/expenses/addExpenses',{headers:{'Authentization':token}})
     .then((response)=>{
         const listExpenses=response.data;
         const htmlList=document.getElementById('list-Expenses');
         listExpenses.forEach(eachExpenses=>{
             const expensesOrder=`<li class="expeseList">
+            <p>${localStorage.getItem('Name')}</P>
             <h4>${eachExpenses.ammount} - ${eachExpenses.description} - ${eachExpenses.category}</h4> 
             <form>
             <input type="hidden" id="expensesID" name="expensesID" value=${eachExpenses.id}>

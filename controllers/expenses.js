@@ -1,8 +1,10 @@
 const Expenses=require('../models/expenses');
+const jwt=require('jsonwebtoken');
 
 exports.getExpensesDetails=async(req,res)=>{
     try{
-         const expenses=await Expenses.findAll();
+         const expenses=await req.user.getExpenses();
+         console.log(expenses);
          res.status(200).json(expenses);
 
     }catch(err){

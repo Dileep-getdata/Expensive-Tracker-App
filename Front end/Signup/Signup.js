@@ -20,6 +20,7 @@ signupForm.addEventListener('submit',(e)=>{
             document.getElementById('name').value='';
             document.getElementById('email').value='';
             document.getElementById('password').value='';
+            window.location.href="../Login/login.html";
         }else{
             throw new Error('Aleary exits');
         }       

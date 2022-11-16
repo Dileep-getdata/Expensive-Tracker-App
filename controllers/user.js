@@ -21,8 +21,9 @@ exports.postSignupDetails= async(req,res)=>{
         }
         const saltrounds=10;
         bcrypt.hash(password,saltrounds, async(err,hash)=>{   
-            const userEmail=await Users.findAll({where:{email}});             
-            if(email===userEmail[0].email){                
+            const userEmail=await Users.findAll({where:{email}});
+            // console.log('checkmail',userEmail);             
+            if(userEmail.length>0 && email===userEmail[0].email ){                
                 return res.status(404).json({success:false,message:'Exiting Email Id'}); 
             }                
                 await Users.create({
@@ -56,7 +57,7 @@ exports.postLogin=(req,res)=>{
                         if(err){
                             throw new Error('Something went wrong inLogin bcrypt compare');
                         }
-                        console.log(result);
+                        // console.log(result);
                         if(result===true){
                             const token = tokenGenrate(user[0].id,user[0].name);
                             return  res.status(200).json({success:true,message:'Succesfully loged in',token:token});

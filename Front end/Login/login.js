@@ -12,12 +12,11 @@ logInForm.addEventListener('submit',(e)=>{
     axios.post('http://localhost:4050/user/login',logIn_details)
         .then(response=>{  
             if(response.status==200)  {
-                console.log(response.data);
-                localStorage.setItem('token',response.data.token);
-                localStorage.setItem('Name',response.data.name);
+                // console.log(response.data);
+                localStorage.setItem('token',response.data.token);                
                 errorSHow(response.data.message,'green');
                 alert('Ding');  
-                window.location.replace("../Expensive/expensive.html");       
+                window.location.href="../Expensive/expensive.html";       
             }else{
                 console.log(response.data); 
                 errorSHow(response.data.message); 

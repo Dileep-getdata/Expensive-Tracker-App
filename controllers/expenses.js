@@ -1,10 +1,11 @@
 const Expenses=require('../models/expenses');
+const User=require('../models/users');
 const jwt=require('jsonwebtoken');
 
 exports.getExpensesDetails=async(req,res)=>{
     try{
          const expenses=await req.user.getExpenses();
-         console.log(expenses);
+        //  console.log(expenses);
          res.status(200).json(expenses);
 
     }catch(err){
@@ -16,8 +17,9 @@ exports.getExpensesDetails=async(req,res)=>{
 
 exports.postExpensesDetails=async (req,res,next)=>{
     try{
-        const {ammount,description,category}=req.body;
-    await Expenses.create({ammount,description,category})
+        const {ammount,description,category}=req.body;        
+    const creating=await req.user.createExpense({ammount,description,category,});
+    
     res.status(200).json({success:true,message:'Successfully Added Expenses'});
     }catch(err){
         console.log(err);

@@ -3,24 +3,33 @@ window.addEventListener('DOMContentLoaded',()=>{
        
     axios.get('http://localhost:4050/expenses/addExpenses',{headers:{'Authentization':token}})
     .then((response)=>{
-        const listExpenses=response.data;
+        const listExpenses=response.data.expenses;        
         const htmlList=document.getElementById('list-Expenses');
         const totalEntery=document.getElementById('totalExpense');
         let totalExpense=0;
         listExpenses.forEach(eachExpenses=>{
-            console.log(totalExpense);
+            
             totalExpense +=parseInt(eachExpenses.ammount);
             
             const expensesOrder=`<li class="expeseList" ">            
             <h4>${eachExpenses.ammount} - ${eachExpenses.description} - ${eachExpenses.category}</h4>            
             <button onclick="expensiveDlt(${eachExpenses.id})" >Delete</button>           
-            </li>`
+            </li>`            
             
-            
-            htmlList.innerHTML += expensesOrder;
-            
+            htmlList.innerHTML += expensesOrder;            
         })
         totalEntery.innerText=totalExpense;
+        const ispremium=response.data.ispremiumuser;
+        console.log(ispremium);
+        if(ispremium){
+            document.getElementById('rzp-button1').style.display='none';
+            document.querySelector('.switch').style.display='inline-block';
+            document.body.classList.toggle('darkMode');
+            
+        //     document.body.style.backgroundColor='black';
+        //     document.body.style.color='white';
+        }
+        
        
     })
     .catch(err=>console.log(err));
@@ -64,19 +73,19 @@ document.getElementById('rzp-button1').onclick = async function (e) {
      "order_id": response.data.order.id, // For one time payment
      "prefill": {
        "name": "Test User",
-       "email": "test.user@example.com",
-       "contact": "7003442036"
+       
+       
      },
      "theme": {
       "color": "#3399cc"
      },
      // This handler function will handle the success payment
      "handler": function (response) {
-         console.log(response);
+         console.log('post:',response);
          axios.post('http://localhost:4050/purchase/updatetransactionstatus',{
              order_id: options.order_id,
              payment_id: response.razorpay_payment_id,
-         }, { headers: {"Authorization" : token} }).then(() => {
+         }, {headers:{'Authentization':token}}).then(() => {
              alert('You are a Premium User Now')
          }).catch(() => {
              alert('Something went wrong. Try Again!!!')
@@ -108,3 +117,11 @@ dropDownForm.addEventListener('submit',(e)=>{
     localStorage.setItem('RowsPerPage',e.target.no_rows.value);
     
 });
+
+// Dark Mode
+const darkmode=document.querySelector('#darkmode');
+darkmode.addEventListener('change',()=>{
+    document.body.classList.toggle('darkMode');
+})
+
+

@@ -4,9 +4,10 @@ const jwt=require('jsonwebtoken');
 
 exports.getExpensesDetails=async(req,res)=>{
     try{
+        
          const expenses=await req.user.getExpenses();
         //  console.log(expenses);
-         res.status(200).json(expenses);
+         res.status(200).json({expenses,ispremiumuser:req.user.ispremiumuser});
 
     }catch(err){
         console.log(err);

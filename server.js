@@ -34,7 +34,7 @@ Users.hasMany(Expenses);
 Users.hasMany(Order);
 Order.belongsTo(Users);
 
-sequelize
+sequelize 
 // .sync({force:true})
 .sync()
 .then((result)=>{

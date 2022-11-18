@@ -1,6 +1,50 @@
+
+
+
+
 const token=localStorage.getItem('token'); 
 window.addEventListener('DOMContentLoaded',()=>{
-       
+    axios.get('http://localhost:4050/expenses/allExpenses',{headers:{'Authentization':token}})
+    .then((response)=>{
+        let responsLength=response.data.length;
+        const leadBoard=document.getElementById('lead-Board');
+        var leadBoardData=`<h3>LEAD BOARD</h3><hr>`;
+        let userIds={};
+        // const sortable
+        let arr=[];
+        response.data.forEach(data=>{             
+            const Ids=data.userId;            
+            axios.post('http://localhost:4050/expenses/userName',{userId:Ids})
+            .then(user=>{ 
+                if(userIds.hasOwnProperty(user.data.userName)){                    
+                    const ammount=parseInt(userIds[user.data.userName]);
+                    arr.push(data.ammount);
+                    userIds[user.data.userName]=ammount+parseInt(data.ammount);
+                }else{ 
+                    arr.push(data.ammount);                   
+                    userIds[user.data.userName]=parseInt(data.ammount);
+                }
+                responsLength--;
+                if(responsLength<1){
+                    const sortable = Object.entries(userIds)
+                    .sort(([,a],[,b]) => b-a)
+                    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
+                    // console.log(sortable);
+                    Object.keys(sortable).forEach(key=>{
+                         leadBoardData +=`<li><span>${key}-</span><span>-${sortable[key]}</span></li>`
+                        console.log(key,sortable[key]);
+                    })
+                    leadBoard.innerHTML = leadBoardData;
+                }                
+               
+            })           
+        })         
+        
+    })
+    .catch(err=>console.log(err))
+
+
+
     axios.get('http://localhost:4050/expenses/addExpenses',{headers:{'Authentization':token}})
     .then((response)=>{
         const listExpenses=response.data.expenses;        
@@ -20,7 +64,7 @@ window.addEventListener('DOMContentLoaded',()=>{
         })
         totalEntery.innerText=totalExpense;
         const ispremium=response.data.ispremiumuser;
-        console.log(ispremium);
+        console.log('ispremium:',ispremium);
         if(ispremium){
             document.getElementById('rzp-button1').style.display='none';
             document.querySelector('.switch').style.display='inline-block';

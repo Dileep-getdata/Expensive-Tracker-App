@@ -2,6 +2,30 @@ const Expenses=require('../models/expenses');
 const User=require('../models/users');
 const jwt=require('jsonwebtoken');
 
+
+
+exports.getAllUserExpenses=async(req,res)=>{
+    
+    try{        
+        const all_expenses=await Expenses.findAll();
+        res.status(200).json(all_expenses);
+    }catch(err){
+        console.log(err);
+        res.status(505).json({success:false,message:'Something went wrong in GET expenses'})
+    }
+}
+
+exports.postExpensesUser=async(req,res)=>{
+        const userId =req.body;
+    try{
+        const expenseUserName=await User.findByPk(userId.userId);       
+        res.status(200).json({userName:expenseUserName.userName,success:true});
+    }catch(err){
+        console.log(err);
+        res.status(505).json({success:false,message:'Something went wrong in GET expenses'})
+    }
+}
+
 exports.getExpensesDetails=async(req,res)=>{
     try{
         

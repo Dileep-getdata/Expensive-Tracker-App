@@ -168,3 +168,7 @@ text-decoration:none;
  .darkMode #totalExpense{
    color: black;
  }
+
+ #dayToDay,#dayToDay tr,#dayToDay td{
+  border:1px solid #111;
+ }

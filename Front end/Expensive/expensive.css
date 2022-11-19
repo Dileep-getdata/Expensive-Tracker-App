@@ -169,6 +169,12 @@ text-decoration:none;
    color: black;
  }
 
- #dayToDay,#dayToDay tr,#dayToDay td{
+ #dayToDay,#dayToDay tr,#dayToDay td,#dayToDay th{
   border:1px solid #111;
+ }
+ .dayToDayC{
+  display: none;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
  }

@@ -25,10 +25,12 @@
                 <input type="text" id="description" name="description" placeholder="Enter Description"><br>
                 <label for="category">Choose Category:</label>
                 <select name="category" id="category">
-                    <option value="fuel">Fuel</option>
-                    <option value="electricity">Electricity</option>
-                    <option value="food">Food</option>
-                    <option value="movie">Movie</option>
+                    <option value="Income">Income</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Fuel">Fuel</option>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Food">Food</option>
+                    <option value="Movie">Movie</option>
                 </select><br><br>
                 <button type="submit" id="submit"> Add Expense </button>                     
                 
@@ -50,21 +52,12 @@
             
         </ul>
         <span>
-            <span>Total Ammount: RS-</span>
+            <span>Total Expenses: RS-</span>
             <span id="totalExpense"></span>
         </span>
-        <div class="dayToDayC">
-            <h2>Day-To-Day EXPENSE</h2> 
-            <h5 id="presntMntYer"></h5> <hr>
-            <table id="dayToDay">
-
-            </table>
-            <button>Download Expenses</button>
-            <h2>Yearly</h2>
-            <table id="yearly">
-
-            </table>
-        </div>
+       <div id="dayToDay" style="display: none;">
+        <button onclick="dayToDayPage()">Day To Day Expense Check</button>
+       </div>
         </div>
         <ol id="lead-Board">
             

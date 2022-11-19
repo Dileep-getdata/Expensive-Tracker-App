@@ -1,7 +1,4 @@
 
-
-
-
 const token=localStorage.getItem('token'); 
 window.addEventListener('DOMContentLoaded',()=>{
     addExpenses();
@@ -17,11 +14,16 @@ function addExpenses(){
         const htmlList=document.getElementById('list-Expenses');
         const totalEntery=document.getElementById('totalExpense');
         let totalExpense=0;
-        if(isPremium){
-            dayToDayExpense(listExpenses);
-        }         
-        listExpenses.forEach(eachExpenses=>{                
-            totalExpense +=parseInt(eachExpenses.ammount);            
+                
+        listExpenses.forEach(eachExpenses=>{     
+            if(eachExpenses.category==='Income'){
+                // totalExpense = totalExpense- parseInt(eachExpenses.ammount);
+                console.log(eachExpenses.category,eachExpenses.ammount);
+            }else{
+                console.log('No income dumbass');
+                totalExpense +=parseInt(eachExpenses.ammount);
+            }           
+                        
             const expensesOrder=`<li class="expeseList" ">            
             <h4>${eachExpenses.ammount} - ${eachExpenses.description} - ${eachExpenses.category}</h4>            
             <button onclick="expensiveDlt(${eachExpenses.id})" >Delete</button>           
@@ -30,7 +32,8 @@ function addExpenses(){
         })
         totalEntery.innerText=totalExpense;
         if(ispremium){
-            isPremium(isPremium);        
+            isPremium(isPremium); 
+            // dayToDayExpense(listExpenses);       
         }
     })
     .catch(err=>console.log(err));
@@ -49,6 +52,7 @@ function isPremium(result){
     if(result){
     document.getElementById('rzp-button1').style.display='none';
             document.querySelector('.switch').style.display='inline-block';
+            document.querySelector('#dayToDay').style.display='flex'
             document.body.classList.toggle('darkMode');
             Leadboard();
     }
@@ -56,56 +60,11 @@ function isPremium(result){
 // 
 // 
 
-// 
-// 
-function dayToDayExpense(listExpenses){
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-    let yearlyExpense=0;
-    let yearlyIncome=0;
-    let yearlySavings=0;
-    const yearlyTable=document.getElementById('yearly');
-
-    const dayToDay=document.getElementById('dayToDay');
-    var leadBoardData=`<tr><th>Date</th><th>Description</th><th>Category</th><th>Income</th><th>Expense</th></tr><hr>`;
-    const presentDate=new Date();
-    let totalExpense=0;
-    let totalIncome=0;
-    let savingsM=0;
-    document.getElementById('presntMntYer').innerHTML=`${monthNames[presentDate.getMonth()] }-${ presentDate.getFullYear()}`;
-    // console.log(presentDate.getMonth()+1,presentDate.getDate(),presentDate.getFullYear())
-    
-    listExpenses.forEach(eachExpen=>{ 
-        const expenseDate=new Date(eachExpen.updatedAt);
-        //   Yearly data gather
-        if(presentDate.getFullYear()===expenseDate.getFullYear()){
-            yearlyExpense += parseInt(eachExpen.ammount);
-            // yearlyIncome += parseInt(eachExpen.income);
-        }           
-                    
-        
-        
-        if(presentDate.getMonth()===expenseDate.getMonth()){
-            totalExpense += parseInt(eachExpen.ammount);
-            leadBoardData += `<tr>
-            <td>${expenseDate.getDate()}-${expenseDate.getMonth()}-${expenseDate.getFullYear()}</td>
-            <td>${eachExpen.description}</td><td>${eachExpen.category}</td><td></td><td>${eachExpen.ammount}</td>
-            </tr>`
-            console.log('table:',expenseDate.getMonth());
-        }        
-
-
-    })
-
-    dayToDay.innerHTML=leadBoardData;
-    savingsM=totalIncome-totalExpense
-    dayToDay.innerHTML += `<tr><td></td><td></td><td></td><td></td><td>${totalExpense}</td></tr>
-    <tr><td>Savings= ₹${savingsM}</td></tr>`;
-
-    yearlySavings=yearlyIncome-yearlyExpense;
-    yearlyTable.innerHTML =`<tr><td></td><td>${yearlyIncome}</td><td>${yearlyExpense}</td><td>${yearlySavings}</td></tr>` 
+function dayToDayPage(){
+    window.location.href="./day-to-dayExpense.html"
 }
+
+
 
 // 
 // 

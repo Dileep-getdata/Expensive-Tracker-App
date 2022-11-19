@@ -87,3 +87,21 @@ function isPremium(result){
             
     }
 }
+
+document.getElementById('downlaodExpense').addEventListener('click',(e)=>{
+    e.preventDefault();
+    axios.get('http://localhost:4050/expenses/download',{headers:{'Authentization':token}})
+    .then(response=>{
+        if(response.status===200){
+            console.log(response);
+        var a=document.createElement('a');
+        a.href=response.data.fileURL;
+        a.download='myexpenses.csv';
+        a.click();
+        }else{
+            throw new Error(response.data.message);
+        }
+        
+    })
+    .catch(err=>console.log(err))
+})

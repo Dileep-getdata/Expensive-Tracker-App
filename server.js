@@ -34,8 +34,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(compression());
 app.use(morgan('combined',{stream:accesLoggnigFile}));
-const privatekey=fs.readFileSync('server.key');
-const certificate=fs.readFileSync('server.cert');
+// const privatekey=fs.readFileSync('server.key');
+// const certificate=fs.readFileSync('server.cert');
 
 const cors=require('cors');
 app.use(cors());

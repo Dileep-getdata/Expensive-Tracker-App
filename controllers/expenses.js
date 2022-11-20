@@ -7,12 +7,12 @@ const s3Services=require('../services/s3Uplaod');
 
 exports.getExpenses=async(req,res)=>{
     try{        
-        const page=req.query.page;
-        const limit=req.query.limit;
-        console.log(page,limit);
+        const page= +req.query.page;
+        const limt= +req.query.limit;
+        console.log('page:-',typeof limt);
         const paggination_expenses=await req.user.getExpenses({
-            limit:5,
-            offset:0*5,
+            limit:limt,
+            offset:page*limt,
             
         });
         res.status(200).json({data:paggination_expenses});

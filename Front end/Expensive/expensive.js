@@ -1,6 +1,14 @@
 
 const token=localStorage.getItem('token'); 
+const limit=localStorage.getItem('RowsPerPage');
 window.addEventListener('DOMContentLoaded',()=>{
+    axios.get(`http://localhost:4050/expenses/getexpenses?page=0&limit=${limit}`,{headers:{'Authentization':token}})
+    .then((data)=>{
+        displayProducts(data.data.data)      
+   
+    })
+    .catch(err=>{console.log(err)});
+
     addExpenses();
 });
 
@@ -10,12 +18,8 @@ function addExpenses(){
     axios.get('http://localhost:4050/expenses/addExpenses',{headers:{'Authentization':token}})
     .then((response)=>{        
         const listExpenses=response.data.expenses;  
-        const ispremium=response.data.ispremiumuser;   
-        
-        
-        // displayProducts(listExpenses);
+        const ispremium=response.data.ispremiumuser;
         getPaggination(listExpenses);
-        
         if(ispremium){
             isPremium(isPremium); 
             // dayToDayExpense(listExpenses);       
@@ -33,20 +37,24 @@ function displayProducts(listExpenses){
     const htmlList=document.getElementById('list-Expenses');
     const totalEntery=document.getElementById('totalExpense');
     let totalExpense=0;
+
+    let expensesOrder=``;
     listExpenses.forEach(eachExpenses=>{     
         if(eachExpenses.category==='Income'){
             // totalExpense = totalExpense- parseInt(eachExpenses.ammount);
             console.log(eachExpenses.category,eachExpenses.ammount);
         }else{
-            console.log('No income dumbass');
-            totalExpense +=parseInt(eachExpenses.ammount);
-        }          
-        const expensesOrder=`<li class="expeseList" ">            
+            // console.log('No income ');
+            expensesOrder += `<li class="expeseList" ">            
         <h4>${eachExpenses.ammount} - ${eachExpenses.description} - ${eachExpenses.category}</h4>            
         <button onclick="expensiveDlt(${eachExpenses.id})" >Delete</button>           
         </li>`
-        htmlList.innerHTML += expensesOrder;            
+            totalExpense +=parseInt(eachExpenses.ammount);
+        }          
+         
+                   
     })
+    htmlList.innerHTML = expensesOrder; 
     totalEntery.innerText=totalExpense;
 }
 
@@ -55,7 +63,7 @@ function displayProducts(listExpenses){
 const pag=document.querySelector('.pagination');
 function getPaggination(listExpenses){    
         const lengthOfList=listExpenses.length;
-        const pageLimt=5;
+        const pageLimt=limit;
         let j=Math.trunc(lengthOfList/pageLimt)
         // let c=0,cc=1;
         if(lengthOfList%pageLimt==0){
@@ -75,7 +83,7 @@ pag.addEventListener('click',(e)=>{
     let idBtn=e.target.id;
     axios.get(`http://localhost:4050/expenses/getexpenses${idBtn}`,{headers:{'Authentization':token}})
     .then((data)=>{   
-        console.log(data.data.data);     
+        // console.log(data.data.data);     
         displayProducts(data.data.data)      
    
     })

@@ -1,4 +1,11 @@
+const fs=require('fs');
+const path=require('path');
+
 const express=require('express');
+const helmet=require('helmet');
+const compression=require('compression');
+const morgan=require('morgan');
+
 const app=express();
 
 
@@ -20,8 +27,12 @@ const Expenses=require('./models/expenses');
 const Order=require('./models/order');
 const Forgotpass=require('./models/forgotpassword');
 
+const accesLoggnigFile=fs.createWriteStream(path.join(__dirname,'access.log'),{flags:'a'});
 
 app.use(express.json());
+app.use(helmet());
+app.use(compression());
+app.use(morgan('combined',{stream:accesLoggnigFile}));
 
 const cors=require('cors');
 app.use(cors());

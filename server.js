@@ -1,5 +1,6 @@
 const fs=require('fs');
 const path=require('path');
+const https=require('https');
 
 const express=require('express');
 const helmet=require('helmet');
@@ -33,6 +34,8 @@ app.use(express.json());
 app.use(helmet());
 app.use(compression());
 app.use(morgan('combined',{stream:accesLoggnigFile}));
+const privatekey=fs.readFileSync('server.key');
+const certificate=fs.readFileSync('server.cert');
 
 const cors=require('cors');
 app.use(cors());
@@ -55,6 +58,7 @@ sequelize
 // .sync({force:true})
 .sync()
 .then((result)=>{
+    // https.createServer({key:privatekey,cert:certificate},app)
     app.listen(4050);
 })
 .catch((err)=>console.log(err));

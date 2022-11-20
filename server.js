@@ -45,6 +45,10 @@ app.use('/expenses',expensesRouter);
 app.use('/purchase',paymentRouter);
 app.use('/password',forgotPassRouter);
 
+app.use((req,res)=>{
+    res.sendFile(path.join(__dirname,`Front end/Signup/Signup.html`));
+})
+
 Users.hasMany(Expenses);
 Expenses.belongsTo(Users);
 

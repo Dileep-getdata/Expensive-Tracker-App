@@ -279,3 +279,4 @@
 ::1 - - [20/Nov/2022:13:03:43 +0000] "GET /Login/login.js HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
 ::1 - - [20/Nov/2022:13:05:41 +0000] "GET /forgotpassword/forgotpass.html HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
 ::1 - - [20/Nov/2022:13:05:42 +0000] "GET /forgotpassword/forgotpass.js HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
+::1 - - [21/Nov/2022:08:57:31 +0000] "GET /user/login HTTP/1.1" 404 247 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"

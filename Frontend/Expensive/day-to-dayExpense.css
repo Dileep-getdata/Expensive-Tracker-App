@@ -1,0 +1,50 @@
+/* Dark Mode for premium */
+.darkMode{
+    background-color: gray;
+    color: aliceblue;
+    text-align: center;
+  }
+  .darkMode .form_container{
+    background-color: white;
+    color: #111   ;
+  }
+  .darkMode #totalExpense{
+    color: black;
+  }
+  .darkMode h2{
+    color: black;
+  }
+ /* Table */
+ table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  tr:nth-child(even) {
+    background-color: rgb(81, 80, 80);
+    color: white;
+}
+  /* tr:hover {
+    background-color: tomato;} */
+  th {
+    height: 50px;
+    background-color: white;
+    color: black;
+  }
+   tr, td, th{
+   border:1px solid #111;
+   
+  }
+  .dayToDayC{
+   display: none;
+   justify-content: center;
+   flex-direction: column;
+   margin: 20px;
+  }
+  .dayToDayC button{
+    padding: 5px;
+    width: 30%;
+    margin: 20px;
+    border-radius: 10px;
+   
+  }

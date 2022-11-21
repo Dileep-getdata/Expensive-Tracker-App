@@ -15,14 +15,15 @@ function isString(string){
 // 
 exports.postSignupDetails= async(req,res)=>{
     try{
-        const {name,email,password}=req.body;    
+        const {name,email,password}=req.body;  
+        console.log(req.body);  
         if(isString(name) || isString(email) || isString(password)){        
             return  res.status(400).json({err:'Bad Input data'});
         }
         const saltrounds=10;
         bcrypt.hash(password,saltrounds, async(err,hash)=>{   
             const userEmail=await Users.findAll({where:{email}});
-            // console.log('checkmail',userEmail);             
+            console.log('checkmail',userEmail);             
             if(userEmail.length>0 && email===userEmail[0].email ){                
                 return res.status(404).json({success:false,message:'Exiting Email Id'}); 
             }                

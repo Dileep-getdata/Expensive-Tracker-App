@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expensive Tracker</title>
+    <link rel="stylesheet" href="expensive.css">
+    <script src="expensive.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>EXPENSIVE TRACKER</h1>
+        
+        <button  id="rzp-button1" style="float: right;"><span id="premiumStar">☆</span> Get Premium</button>
+        <label class="switch"> 
+            <input name='darkmode' id="darkmode" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+        <div class="form_container">
+            <form  id="myform" method="post" >
+                <label for="amount">Choose Expense Amount:</label>
+                <input type="text" id="amount" name="amount" placeholder="Enter Amount"><br>
+                <label for="description">Choose Description:</label>
+                <input type="text" id="description" name="description" placeholder="Enter Description"><br>
+                <label for="category">Choose Category:</label>
+                <select name="category" id="category">
+                    <option value="Income">Income</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Fuel">Fuel</option>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Food">Food</option>
+                    <option value="Movie">Movie</option>
+                </select><br><br>
+                <button type="submit" id="submit"> Add Expense </button>                     
+                
+            </form>
+        </div >
+        <div class='listOfExpenses' >
+        <form method="POST" id="dropDownForm">
+            <label for="cars">Rows per page:</label>
+
+                <select name="no_rows" id="no_rows">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                </select>
+                <button type="submit" class="rows_drpDown">Apply</button>
+        </form>
+        <ul id="list-Expenses">
+            
+        </ul>
+        <span>
+            <span>Total Expenses: RS-</span>
+            <span id="totalExpense"></span>
+        </span>
+        <section class="pagination"></section>
+       <div id="dayToDay" style="display: none;">
+        <button onclick="dayToDayPage()">Day To Day Expense Check</button>
+       </div>
+        </div>
+        <ol id="lead-Board">
+            
+        </ol>
+        
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</html>

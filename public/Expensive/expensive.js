@@ -2,7 +2,7 @@
 const token=localStorage.getItem('token'); 
 const limit=localStorage.getItem('RowsPerPage');
 window.addEventListener('DOMContentLoaded',()=>{
-    axios.get(`http://localhost:4050/expenses/getexpenses?page=0&limit=${limit}`,{headers:{'Authentization':token}})
+    axios.get(`http://3.89.220.159:4050/expenses/getexpenses?page=0&limit=${limit}`,{headers:{'Authentization':token}})
     .then((data)=>{
         displayProducts(data.data.data)      
    
@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded',()=>{
 // 
 // 
 function addExpenses(){
-    axios.get('http://localhost:4050/expenses/addExpenses',{headers:{'Authentization':token}})
+    axios.get('http://3.89.220.159:4050/expenses/addExpenses',{headers:{'Authentization':token}})
     .then((response)=>{        
         const listExpenses=response.data.expenses;  
         const ispremium=response.data.ispremiumuser;
@@ -81,7 +81,7 @@ function getPaggination(listExpenses){
 
 pag.addEventListener('click',(e)=>{
     let idBtn=e.target.id;
-    axios.get(`http://localhost:4050/expenses/getexpenses${idBtn}`,{headers:{'Authentization':token}})
+    axios.get(`http://3.89.220.159:4050/expenses/getexpenses${idBtn}`,{headers:{'Authentization':token}})
     .then((data)=>{   
         // console.log(data.data.data);     
         displayProducts(data.data.data)      
@@ -124,7 +124,7 @@ myform.addEventListener('submit',(e)=>{
     const description=document.getElementById('description');
     const category=document.getElementById('category');
     const expensesObj={ammount:ammount.value,description:description.value,category:category.value}
-    axios.post('http://localhost:4050/expenses/addExpenses',expensesObj,{headers:{'Authentization':token}})
+    axios.post('http://3.89.220.159:4050/expenses/addExpenses',expensesObj,{headers:{'Authentization':token}})
     .then(response=>{
         
         ammount.value='';
@@ -140,7 +140,7 @@ myform.addEventListener('submit',(e)=>{
 // 
 // 
  function expensiveDlt(id){
-    axios.post('http://localhost:4050/expenses/deleteId',{id:id});
+    axios.post('http://3.89.220.159:4050/expenses/deleteId',{id:id});
     console.log(id);
 }
 // 
@@ -148,7 +148,7 @@ myform.addEventListener('submit',(e)=>{
 
 // PREMIMUM BUTTTON
 document.getElementById('rzp-button1').onclick = async function (e) {
-    const response  = await axios.get('http://localhost:4050/purchase/premiummembership', {headers:{'Authentization':token}});
+    const response  = await axios.get('http://3.89.220.159:4050/purchase/premiummembership', {headers:{'Authentization':token}});
     console.log(response);
     var options =
     {
@@ -165,7 +165,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
      // This handler function will handle the success payment
      "handler": function (response) {
          console.log('post:',response);
-         axios.post('http://localhost:4050/purchase/updatetransactionstatus',{
+         axios.post('http://3.89.220.159:4050/purchase/updatetransactionstatus',{
              order_id: options.order_id,
              payment_id: response.razorpay_payment_id,
          }, {headers:{'Authentization':token}}).then(() => {
@@ -206,7 +206,7 @@ darkmode.addEventListener('change',()=>{
 })
 
 function Leadboard(){
-    axios.get('http://localhost:4050/expenses/allExpenses',{headers:{'Authentization':token}})
+    axios.get('http://3.89.220.159:4050/expenses/allExpenses',{headers:{'Authentization':token}})
     .then((response)=>{
         let responsLength=response.data.length;
         const leadBoard=document.getElementById('lead-Board');
@@ -217,7 +217,7 @@ function Leadboard(){
         response.data.forEach(data=>{ 
                        
             const Ids=data.userId;            
-            axios.post('http://localhost:4050/expenses/userName',{userId:Ids})
+            axios.post('http://3.89.220.159:4050/expenses/userName',{userId:Ids})
             .then(user=>{ 
                 if(userIds.hasOwnProperty(user.data.userName)){                    
                     const ammount=parseInt(userIds[user.data.userName]);

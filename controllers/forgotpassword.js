@@ -22,12 +22,12 @@ exports.forgotPassword= async (req, res) => {
             //     from: 'dileep2424@hotmail.com', // Change to your verified sender
             //     subject: 'Resetpassword',
             //     text: 'Hi There, check the below link to reset you password',
-            //     html: `<a href="http://localhost:4050/password/resetpassword/${id}">Reset password</a>`,
+            //     html: `<a href="http://3.89.220.159:4050/password/resetpassword/${id}">Reset password</a>`,
             // }
             // sgMail
             // .send(msg)
             .then((response) => {
-                console.log(`http://localhost:4050/password/resetpassword/${id}`);
+                console.log(`http://3.89.220.159:4050/password/resetpassword/${id}`);
                 // console.log(response[0].statusCode)
                 // console.log(response[0].headers)
                 return res.status(202).json({message: 'Link to reset password sent to your mail ', sucess: true})

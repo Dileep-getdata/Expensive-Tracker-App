@@ -11,7 +11,7 @@ logInForm.addEventListener('submit',(e)=>{
         password:password
     };   
     
-    axios.post('http://localhost:4050/user/login',logIn_details)
+    axios.post('http://3.89.220.159:4050/user/login',logIn_details)
         .then(response=>{  
             if(response.status==200)  {
                 // console.log(response.data);

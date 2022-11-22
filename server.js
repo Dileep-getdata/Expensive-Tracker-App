@@ -48,7 +48,7 @@ app.use('/password',forgotPassRouter);
 app.use((req,res)=>{
     console.log(req.url)
     res.sendFile(path.join(__dirname,`Frontend/${req.url}`));
-})
+});
 
 Users.hasMany(Expenses);
 Expenses.belongsTo(Users);

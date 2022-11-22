@@ -1,3 +1,5 @@
+{/* <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" ></script> */}
+
 const logInForm=document.getElementById('logIn_form');
 
 logInForm.addEventListener('submit',(e)=>{
@@ -9,7 +11,7 @@ logInForm.addEventListener('submit',(e)=>{
         password:password
     };   
     
-    axios.post('http://3.89.220.159:4050/user/login',logIn_details)
+    axios.post('http://localhost:4050/user/login',logIn_details)
         .then(response=>{  
             if(response.status==200)  {
                 // console.log(response.data);

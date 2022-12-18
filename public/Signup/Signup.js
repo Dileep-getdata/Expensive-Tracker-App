@@ -12,7 +12,7 @@ signupForm.addEventListener('submit',(e)=>{
         email:email,
         password:password,
     } 
-    axios.post('http://3.89.220.159:4050/user/signup',signup_details)
+    axios.post('http://localhost:4050/user/signup',signup_details)
     .then(response=>{        
             console.log(response.data.message); 
         if(response.status===200){

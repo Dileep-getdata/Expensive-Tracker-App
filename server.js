@@ -11,11 +11,12 @@ const app=express();
 
 
 
+
 const dotenv=require('dotenv');
 dotenv.config();
 
 
-const sequelize=require('./util/database');
+// const sequelize=require('./util/database');
 const bodypraser=require('body-parser');
 
 const userRouter=require('./router/user');
@@ -40,30 +41,47 @@ app.use(morgan('combined',{stream:accesLoggnigFile}));
 const cors=require('cors');
 app.use(cors());
 
-app.use('/user',userRouter);
-app.use('/expenses',expensesRouter);
-app.use('/purchase',paymentRouter);
-app.use('/password',forgotPassRouter);
+// app.use('/user',userRouter);
+// app.use('/expenses',expensesRouter);
+// app.use('/purchase',paymentRouter);
+// app.use('/password',forgotPassRouter);
 
 app.use((req,res)=>{
     console.log(req.url)
     res.sendFile(path.join(__dirname,`public/${req.url}`));
 });
 
-Users.hasMany(Expenses);
-Expenses.belongsTo(Users);
+// Users.hasMany(Expenses);
+// Expenses.belongsTo(Users);
 
-Users.hasMany(Order);
-Order.belongsTo(Users);
+// Users.hasMany(Order);
+// Order.belongsTo(Users);
 
-Users.hasMany(Forgotpass);
-Forgotpass.belongsTo(Users);
+// Users.hasMany(Forgotpass);
+// Forgotpass.belongsTo(Users);
 
-sequelize 
-// .sync({force:true})
-.sync()
-.then((result)=>{
-    // https.createServer({key:privatekey,cert:certificate},app)
-    app.listen(4050);
-})
-.catch((err)=>console.log(err));
+const mongodb=require('mongodb');
+const mongoose=require('mongoose');
+
+mongoose.set('strictQuery', false);
+async function connectMongo(){
+    try{
+        const uri="mongodb+srv://dileept:yff0vQOI5ydGymHy@cluster0.6dnyjsd.mongodb.net/?retryWrites=true&w=majority"
+        await mongoose.connect(uri);
+        console.log('Connected!')
+    }catch(err){
+        console.log(err)
+    }
+}
+connectMongo();
+
+app.listen(4050);
+
+// sequelize 
+// // .sync({force:true})
+// .sync()
+// .then((result)=>{
+//     // https.createServer({key:privatekey,cert:certificate},app)
+//     app.listen(4050);
+// })
+// .catch((err)=>console.log(err));

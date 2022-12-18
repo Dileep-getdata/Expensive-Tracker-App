@@ -22,16 +22,20 @@ exports.postSignupDetails= async(req,res)=>{
         }
         const saltrounds=10;
         bcrypt.hash(password,saltrounds, async(err,hash)=>{   
-            const userEmail=await Users.findAll({where:{email}});
+            const userEmail=await Users.find({email:email});
             console.log('checkmail',userEmail);             
-            if(userEmail.length>0 && email===userEmail[0].email ){                
+            if(userEmail.length>0 && email===userEmail.email ){                
                 return res.status(404).json({success:false,message:'Exiting Email Id'}); 
             }                
-                await Users.create({
+               const user= await new Users({
                     userName:name,
                     email:email,
                     password:hash});
-                res.status(200).json({success:true,message:'Successfully signed Up'});        
+                user.save()
+                .then(()=>{
+                    res.status(200).json({success:true,message:'Successfully signed Up'});
+                })
+                        
         
         })    
     }
@@ -50,7 +54,7 @@ exports.postLogin=(req,res)=>{
         if(isString(email) || isString(password)){
             return res.status(400).json({err:'Bad Input'});
         }
-        Users.findAll({where:{email:email}})
+        Users.find({email:email})
             .then((user)=>{   
                         
                 if(user[0]!==undefined){ 
